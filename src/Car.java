@@ -5,7 +5,7 @@ public class Car {
     String color;
     int year;
     String country;
-
+// невозможно нормально работать
     public Car(String brand, String model, double engineVolume, String color, int year, String country) {
         if(brand == null || brand.isEmpty()|| brand.isBlank()){
             this.brand =" default, ";
