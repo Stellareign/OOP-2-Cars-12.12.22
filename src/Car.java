@@ -1,13 +1,8 @@
 import java.time.LocalDate;
 
-public class Car {
-    final String brand;
-    final String model;
+public class  Car extends Transport {
+
     double engineVolume;
-    String color;
-    final int releasYear;
-    final String country;
-    // новые данные
     String transmission;
     final String bodyType;
     final int numberOfSeats;
@@ -15,38 +10,14 @@ public class Car {
     String tire;
     private Key key;
 
-    //    Key key = new Key("", "");
-    public Car(String brand, String model, double engineVolume, String color, int year, String country, String transmission, String bodyType,
-               int numberOfSeats, String regNumber, String tire, Key key) {
-        if (brand != null && !brand.isEmpty() && !brand.isBlank()) {
-            this.brand = brand;
-        } else {
-            this.brand = " default, ";
-        }
-        if (model == null || model.isBlank() || model.isEmpty()) {
-            this.model = " default ";
-        } else {
-            this.model = model;
-        }
+    public Car(String brand, String model, double engineVolume, String color, int releaseYear, String country, String transmission, String bodyType,
+               int numberOfSeats, String regNumber, String tire, int maxSpeed, Key key) {
+        super( brand, model, country, releaseYear, color, maxSpeed);
+
         if (engineVolume >= 0) {
             this.engineVolume = engineVolume;
         } else {
             this.engineVolume = 1.5;
-        }
-        if (color == null || color.isEmpty() || color.isBlank()) {
-            this.color = " белый ";
-        } else {
-            this.color = color;
-        }
-        if (year <= 0) {
-            this.releasYear = 2000;
-        } else {
-            this.releasYear = year;
-        }
-        if (country == null || country.isBlank() || country.isEmpty()) {
-            this.country = " default ";
-        } else {
-            this.country = country;
         }
 
         if (transmission != null && !transmission.isEmpty() && !transmission.isBlank()) {
@@ -65,7 +36,7 @@ public class Car {
             this.numberOfSeats = 4;
         }
         this.tire = changeTires();
-        this.regNumber = regNumber;
+        this.regNumber = checkRegNumber();
         this.key = key;
     }
 
@@ -144,19 +115,20 @@ public class Car {
     @Override
     public String toString() {
         return "Автомобиль " + brand + " " + model + "; объём движка " + engineVolume + " л; цвет " +
-                color + "; год выпуска: " + releasYear + " г.; cтрана производства: " + country + "; КПП: " + transmission + "; тип кузова: " + bodyType +
-                "; количество мест: " + numberOfSeats + "; гос.номер: " + checkRegNumber() + "; тип покрышек: " + tire + "; удалённый доступ: " + getKey();
+                color + "; год выпуска: " + releaseYear + " г.; cтрана производства: " + country + "; КПП: " + transmission + "; тип кузова: " + bodyType +
+                "; количество мест: " + numberOfSeats + "; гос.номер: " + checkRegNumber() + "; тип покрышек: " + tire + "; максимальная скорость: " +
+                maxSpeed + " км/ч; удалённый доступ: " + getKey();
     }
 
 
     // ГЕТТЕРЫ/СЕТТЕРЫ:
-    public String getBrand() {
-        return brand;
-    }
+//    public String getBrand() {
+//        return brand;
+//    }
 
-    public String getModel() {
-        return model;
-    }
+//    public String getModel() {
+//        return model;
+//    }
 
     public double getEngineVolume() {
         return engineVolume;
@@ -167,22 +139,22 @@ public class Car {
         return this;
     }
 
-    public String getColor() {
-        return color;
-    }
+//    public String getColor() {
+//        return color;
+//    }
 
-    public Car setColor(String color) {
-        this.color = color;
-        return this;
-    }
-
-    public int getReleasYear() {
-        return releasYear;
-    }
-
-    public String getCountry() {
-        return country;
-    }
+//    public Car setColor(String color) {
+//        this.color = color;
+//        return this;
+//    }
+//
+//    public int getReleaseYear() {
+//        return releaseYear;
+//    }
+//
+//    public String getCountry() {
+//        return country;
+//    }
 
     public String getTransmission() {
         return transmission;
