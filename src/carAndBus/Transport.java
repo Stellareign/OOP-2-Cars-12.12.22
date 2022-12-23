@@ -1,3 +1,4 @@
+package carAndBus;
 public class Transport {
     final String brand;
     final String model;
@@ -5,7 +6,7 @@ public class Transport {
     final int releaseYear;
     final String country;
     int maxSpeed;
-// ============КОНТРУКТОР==================
+    // ============КОНТРУКТОР==================
     public Transport(String brand, String model, String color, int releaseYear, String country, int maxSpeed) {
         if (brand != null && !brand.isEmpty() && !brand.isBlank()) {
             this.brand = brand;
@@ -35,7 +36,7 @@ public class Transport {
         if (maxSpeed != 0 && maxSpeed > 0) {
             this.maxSpeed = maxSpeed;
         } else{
-            maxSpeed = 90;
+            this.maxSpeed = 40;
         }
 
     }

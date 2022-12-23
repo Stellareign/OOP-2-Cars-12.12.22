@@ -1,3 +1,6 @@
+package carAndBus;
+
+
 import java.time.LocalDate;
 
 public class  Car extends Transport {
@@ -107,11 +110,7 @@ public class  Car extends Transport {
         return key;
     }
 
-    //      String transmission;
-    //    final String bodyType = null;
-    //    final int numberOfSeats = 0;
-    //    String regNumber;
-    //    String tire;
+
     @Override
     public String toString() {
         return "Автомобиль " + brand + " " + model + "; объём движка " + engineVolume + " л; цвет " +
@@ -121,14 +120,14 @@ public class  Car extends Transport {
     }
 
 
-    // ГЕТТЕРЫ/СЕТТЕРЫ:
-//    public String getBrand() {
-//        return brand;
-//    }
+    //   ГЕТТЕРЫ/СЕТТЕРЫ:
+    public String getBrand() {
+        return brand;
+    }
 
-//    public String getModel() {
-//        return model;
-//    }
+    public String getModel() {
+        return model;
+    }
 
     public double getEngineVolume() {
         return engineVolume;
@@ -139,22 +138,22 @@ public class  Car extends Transport {
         return this;
     }
 
-//    public String getColor() {
-//        return color;
-//    }
+    public String getColor() {
+        return color;
+    }
 
-//    public Car setColor(String color) {
-//        this.color = color;
-//        return this;
-//    }
-//
-//    public int getReleaseYear() {
-//        return releaseYear;
-//    }
-//
-//    public String getCountry() {
-//        return country;
-//    }
+    public Car setColor(String color) {
+        this.color = color;
+        return this;
+    }
+
+    public int getReleaseYear() {
+        return releaseYear;
+    }
+
+    public String getCountry() {
+        return country;
+    }
 
     public String getTransmission() {
         return transmission;

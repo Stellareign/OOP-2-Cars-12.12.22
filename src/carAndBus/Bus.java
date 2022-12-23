@@ -1,3 +1,5 @@
+package carAndBus;
+
 public class Bus extends Transport {
     final String typeOfBody;
     final String typeOfBus;

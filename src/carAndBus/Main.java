@@ -1,4 +1,4 @@
-import java.security.Key;
+package carAndBus;
 
 public class Main {
     public static void main(String[] args) {
@@ -122,7 +122,7 @@ public class Main {
                 "Scania GR875R - 8 ст.",
                 48,
                 2,
-                120,
+                0,
                 "23cx2"
         );
         System.out.println(paz);
