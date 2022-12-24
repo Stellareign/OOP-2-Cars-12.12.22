@@ -35,6 +35,6 @@ public class DriverD<D extends Bus> extends Driver {
 
     @Override
     public String toString() {
-        return super.toString() + ", управляется автобусом " + bus.brand + " " + bus.model + " и будет участвовать в заезде";
+        return super.toString() + ", управляет автобусом " + bus.brand + " " + bus.model + " и будет участвовать в заезде";
     }
 }
