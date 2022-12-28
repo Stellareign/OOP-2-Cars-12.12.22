@@ -1,10 +1,13 @@
 package races;
 
+import java.util.Objects;
+
 public abstract class Transport implements Competing {
     final String brand;
     final String model;
     double engineVolume;
     static String transmission;
+    protected String tsType;
 
     public Transport(String brand, String model, double engineVolume, String transmission) {
         if (brand != null && !brand.isEmpty() && !brand.isBlank()) {
@@ -23,16 +26,25 @@ public abstract class Transport implements Competing {
             this.engineVolume = 1.5;
         }
         this.transmission = checkTransmission();
-    }
-        // ========== ПРОВЕРКА КПП: ==============
-        private static  String checkTransmission () {
-            if (transmission == "АКПП" || transmission== "МКПП") {
-                return transmission;
-            }
-           else{ return "МКПП";}
-        }
 
-//    }
+    }
+
+    // ========== ПРОВЕРКА КПП: ==============
+    private static String checkTransmission() {
+        if (transmission == "АКПП" || transmission == "МКПП") {
+            return transmission;
+        } else {
+            return "МКПП";
+        }
+    }
+
+    //    ==== ПЕЧАТЬ tsType: ====
+    public void printType() {
+        if (tsType == null || tsType.isBlank() || tsType.isEmpty()) {
+            System.out.println("Данных по транспортному средству недостаточно");
+        } else
+            System.out.println(tsType);
+    }
     // ======= ИМПЛЕМЕНТАЦИЯ СОРЕВНУЮЩИХСЯ:=====
 
     @Override
@@ -42,12 +54,12 @@ public abstract class Transport implements Competing {
 
     @Override
     public void bestTimeOfLap() {
-        System.out.println(" показал лучшее время, мин.: " );
+        System.out.println(" показал лучшее время, мин.: ");
     }
 
     @Override
     public void maxSpeed() {
-        System.out.println(" развил максимальную скорость, км/ч: " );
+        System.out.println(" развил максимальную скорость, км/ч: ");
     }
 
     // ======ГЕТТЕРЫ: ============
@@ -57,5 +69,33 @@ public abstract class Transport implements Competing {
 
     public String getModel() {
         return model;
+    }
+
+    public String getTsType() {
+        return tsType;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Transport transport = (Transport) o;
+        return Double.compare(transport.engineVolume, engineVolume) == 0 && brand.equals(transport.brand)
+                && model.equals(transport.model) ;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(brand, model, engineVolume);
+    }
+
+    @Override
+    public String toString() {
+        return "Transport{" +
+                "brand='" + brand + '\'' +
+                ", model='" + model + '\'' +
+                ", engineVolume=" + engineVolume +
+                ", tsType='" +  '\'' +
+                '}';
     }
 }

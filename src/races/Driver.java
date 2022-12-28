@@ -1,6 +1,7 @@
 package races;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 public abstract class Driver {
     private final String fio;
@@ -56,7 +57,7 @@ public abstract class Driver {
         return drivingExperience;
     }
 // ===== абстрактные методы: ====
-public abstract  void startDrive();
+    public abstract  void startDrive();
     public abstract void finishDrive();
     public abstract void refuelTheCar();
 
@@ -87,5 +88,26 @@ public abstract  void startDrive();
                 "; стаж вождения, лет: " + calculateDrivingExperience();
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Driver driver = (Driver) o;
+
+        if (yearOfPrimaryDriveLicense != driver.yearOfPrimaryDriveLicense) return false;
+        if (drivingExperience != driver.drivingExperience) return false;
+        if (!Objects.equals(fio, driver.fio)) return false;
+        return Objects.equals(drivingCategory, driver.drivingCategory);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = fio != null ? fio.hashCode() : 0;
+        result = 31 * result + (drivingCategory != null ? drivingCategory.hashCode() : 0);
+        result = 31 * result + yearOfPrimaryDriveLicense;
+        result = 31 * result + drivingExperience;
+        return result;
+    }
 }
 

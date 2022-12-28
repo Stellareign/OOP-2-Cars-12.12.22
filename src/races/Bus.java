@@ -1,13 +1,14 @@
 package races;
 
 public class Bus<D> extends Transport implements Competing, Drive {
-
-    public Bus(String brand, String model, double engineVolume, String transmission) {
+public BusCapacity busCapacity;
+    public Bus(String brand, String model, double engineVolume, String transmission, BusCapacity busCapacity) {
         super(brand, model, engineVolume, transmission);
+        this.busCapacity = busCapacity;
     }
     // ========== ПРОВЕРКА КПП: ==============
     private String checkTransmission() {
-        if (!transmission.equals("АКПП") && !transmission.equals("МКПП")) {
+        if (transmission != "АКПП" && transmission != "МКПП") {
             return "МКПП";
         }
         return transmission;
@@ -16,10 +17,10 @@ public class Bus<D> extends Transport implements Competing, Drive {
     // ====== ИМПЕЛЕНТАЦИЯ: ======
     @Override
     public void startDrive() {
-        if (transmission.equals("МКПП")) {
-            System.out.println(getBrand() + " " + getModel() + ": вставить ключ зажигания. \n Выжать сцепление. \n Повернуть ключ. \n Переключить передачу на КПП. \n " +
-                    "Нажать на газ \n Плавно отпустить сцепление. \n Погнали!");
-        } else if (transmission.equals("АКПП")) {
+        if (transmission == "МКПП") {
+            System.out.println(getBrand() + " " + getModel() + ": вставить ключ зажигания. \n Выжать сцепление, снять с ручника. \n Повернуть ключ. \n " +
+                    "Переключить передачу на КПП. \n  + Нажать на газ \n Плавно отпустить сцепление. \n Погнали!");
+        } else if (transmission == "АКПП") {
             System.out.println("Вставить ключ зажигания. \n Повернуть ключ. \n Переключить передачу на КПП. \n " +
                     "Нажать на газ. \n Погнали!");
         }
@@ -28,12 +29,12 @@ public class Bus<D> extends Transport implements Competing, Drive {
 
     @Override
     public void finishDrive() {
-        if (transmission.equals("МКПП")) {
+        if (transmission == "МКПП") {
             System.out.println(getBrand() + " " + getModel() + ": начать тормозить, нажав на тормоз. \n Нажать сцепление. \n Переключить передачу на КПП. \n " +
-                    "Плавно затормозить. \n Отпустить сцепление. \n Ну всё, приехали.");}
-        else if (transmission.equals("АКПП")) {
-            System.out.println("Начать тормозить, нажав на тормоз. \n Переключить передачу на КПП. \n " +
-                    "Плавно затормозить. \n Ну всё, приехали.");}
+                    "Плавно затормозить. \n Отпустить сцепление, поставить на ручник. \n Ну всё, приехали.");}
+        else if (transmission == "АКПП") {
+            System.out.println("Начать тормозить, нажав на тормоз. \n " +
+                    "Плавно затормозить. \n + Переключить передачу на КПП. \n + Ну всё, приехали.");}
     }
 
 // ====== СОРЕВНУЮЩИЕСЯ: =====
@@ -54,9 +55,30 @@ public class Bus<D> extends Transport implements Competing, Drive {
         System.out.print("В категории D автобус " + getModel() + " " + getBrand() + " ");
         super.maxSpeed() ;
     }
+    // ==== переопределение ТРАНСПОРТ: ===
+
+    @Override
+    public void printType() {
+        if (busCapacity != null) {
+            System.out.println("Автобус " + brand + " " + model + ": " + busCapacity);
+        } else {
+            System.out.println("Автобус " + brand + " " + model + ": данных по транспортному средству недостаточно.");
+        }
+    }
+
+    // ===== ГЕТТЕР И СЕТТЕР(?)  ВМЕСТИМОСТИ :
+    public BusCapacity getBusCapacity() {
+        return busCapacity;
+    }
+
+    public Bus<D> setBusCapacity(BusCapacity busCapacity) {
+        this.busCapacity = busCapacity;
+        return this;
+    }
 
     @Override
     public String toString() {
-        return brand  + " " + model + "; объём движка: " + engineVolume + "; КПП: " + checkTransmission() + "\n";
+        return brand  + " " + model + "; объём движка: " + engineVolume + "; КПП: " + checkTransmission() + "; " + busCapacity + "\n";
     }
+
 }

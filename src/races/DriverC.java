@@ -1,5 +1,7 @@
 package races;
 
+import java.util.Objects;
+
 public class DriverC <C extends CargoCar> extends Driver{// implements Drive
 private C cargoCar;
     public DriverC(String fio, String drivingCategory, int yearOfPrimaryDriveLicense,C cargoCar) {
@@ -43,6 +45,20 @@ private C cargoCar;
     public DriverC<C> setCargoCar(C cargoCar) {
         this.cargoCar = cargoCar;
         return this;
+    }
+// =========== иквалс и хэшкод =======
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        DriverC<?> driverC = (DriverC<?>) o;
+        return cargoCar.equals(driverC.cargoCar);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), cargoCar);
     }
     // ====== ТУСТРИНГ: =========
 
