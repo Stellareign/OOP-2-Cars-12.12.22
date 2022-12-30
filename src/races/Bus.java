@@ -2,6 +2,7 @@ package races;
 
 public class Bus<D> extends Transport implements Competing, Drive {
 public BusCapacity busCapacity;
+String capacity;
     public Bus(String brand, String model, double engineVolume, String transmission, BusCapacity busCapacity) {
         super(brand, model, engineVolume, transmission);
         this.busCapacity = busCapacity;
@@ -65,10 +66,22 @@ public BusCapacity busCapacity;
             System.out.println("Автобус " + brand + " " + model + ": данных по транспортному средству недостаточно.");
         }
     }
+// ===== ДИАГНОСТИКА: =======
+
+    @Override
+    public void Diagnostics()  {
+        throw new UnsupportedOperationException("для данного вида ТС " + getBrand() + " " + getModel() + " не выполняется диагностика");
+    }
 
     // ===== ГЕТТЕР И СЕТТЕР(?)  ВМЕСТИМОСТИ :
+
     public BusCapacity getBusCapacity() {
         return busCapacity;
+    }
+
+    public Bus<D> setCapacity(String capacity) {
+        this.capacity = capacity;
+        return this;
     }
 
     public Bus<D> setBusCapacity(BusCapacity busCapacity) {

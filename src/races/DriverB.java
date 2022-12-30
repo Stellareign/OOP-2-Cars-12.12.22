@@ -2,19 +2,40 @@ package races;
 
 public class DriverB <B extends PassengCar> extends Driver  {
     private B car;
-    DriverB(String fio, String drivingCategory, int yearOfPrimaryDriveLicense, B car) {
+    DriverB(String fio, String drivingCategory, int yearOfPrimaryDriveLicense, B car) throws DrivingCategoryException {
         super(fio, drivingCategory, yearOfPrimaryDriveLicense);
-        this.drivingCategory = checkCategory();
-        this.car = car;
+        try {
+            if (drivingCategory == "В" || drivingCategory == "B") { // почему не работает смена языка????
+                this.drivingCategory = drivingCategory;
+            } else {
+                this.drivingCategory = "недопустимая категория";
+                throw new DrivingCategoryException("Для водителя " + getFio() + "укажите корректную категорию прав");
             }
-    //======= НЕДОПУСТИМАЯ КАТЕГОРИЯ ========
-    public String checkCategory() {
-        if (drivingCategory == "В" || drivingCategory == "B") { // почему не работает смена языка????
-            this.drivingCategory = drivingCategory;
-        } else {
-            drivingCategory = "недопустимая категория";}
-        return drivingCategory;
+        }
+        catch (DrivingCategoryException e) {
+            System.out.println(e.getMessage());
+        }
+        this.car = car;
     }
+    //======= НЕДОПУСТИМАЯ КАТЕГОРИЯ ========
+//    public void checkCategory() throws DrivingCategoryException {
+//
+//        try {
+//            if (drivingCategory == "В" || drivingCategory == "B") { // почему не работает смена языка????
+//                this.drivingCategory = drivingCategory;
+//            } else {
+//                throw new DrivingCategoryException("Для водителя " + getFio() + "укажите корректную категорию прав");
+//            }
+//                    }catch (DrivingCategoryException e){
+//            drivingCategory = e.getMessage();
+//        }
+//
+//    }
+
+//    @Override
+//    public String checkDrivingCategory() throws DrivingCategoryException {
+//        return super.checkDrivingCategory();
+//    }
 
     @Override
     public void startDrive()  {

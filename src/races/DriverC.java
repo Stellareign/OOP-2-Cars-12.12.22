@@ -6,17 +6,27 @@ public class DriverC <C extends CargoCar> extends Driver{// implements Drive
 private C cargoCar;
     public DriverC(String fio, String drivingCategory, int yearOfPrimaryDriveLicense,C cargoCar) {
         super(fio, drivingCategory, yearOfPrimaryDriveLicense);
-        this.drivingCategory = checkCategory();
+        try {
+            if (drivingCategory == "C" || drivingCategory == "С") { // почему не работает смена языка????
+                this.drivingCategory = drivingCategory;
+            } else {
+                this.drivingCategory = "недопустимая категория";
+                throw new DrivingCategoryException("Для водителя " + getFio() + "укажите корректную категорию прав");
+            }
+        }
+        catch (DrivingCategoryException e) {
+            System.out.println(e.getMessage());
+        }
         this.cargoCar = cargoCar;
     }
     //======= НЕДОПУСТИМАЯ КАТЕГОРИЯ ========
-    public String checkCategory() {
-        if (drivingCategory == "С" || drivingCategory == "C") { // почему не работает смена языка????
-            this.drivingCategory = drivingCategory;
-        } else {
-            drivingCategory = "недопустимая категория";}
-        return drivingCategory;
-    }
+//    public String checkCategory() {
+//        if (drivingCategory == "С" || drivingCategory == "C") { // почему не работает смена языка????
+//            this.drivingCategory = drivingCategory;
+//        } else {
+//            drivingCategory = "недопустимая категория";}
+//        return drivingCategory;
+//    }
 
     @Override
     public void startDrive() {

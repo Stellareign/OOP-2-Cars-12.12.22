@@ -28,9 +28,9 @@ public enum LoadCapacity {
     public String toString() {
 
         if (minLoadCapacity == null) {
-            return "; грузоподъёмность  до " + maxLoadCapacity + " т.";
+            return "грузоподъёмность  до " + maxLoadCapacity + " т.";
         } else if (maxLoadCapacity == null) {
-            return "; грузоподъёмность  от " + minLoadCapacity + " т.";
+            return "грузоподъёмность  от " + minLoadCapacity + " т.";
         } else {
             return "грузоподъёмность от " + minLoadCapacity + " до " + maxLoadCapacity + " т.";
         }

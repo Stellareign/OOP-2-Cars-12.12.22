@@ -71,6 +71,13 @@ public class CargoCar<C> extends Transport implements Drive, Competing {
             System.out.println("Грузовик "  + brand + " " + model + ": данных по транспортному средству недостаточно.");
         }
     }
+    // === диагностика: =====
+
+    @Override
+    public void Diagnostics() {
+        System.out.println("Грузовик "  + brand + " " + model + " находится на диагностике");
+    }
+
     // ===== ГЕТТЕР И СЕТТЕР(?) ГРУЗОПОДЪЁМНОСТИ: =====
 
     public LoadCapacity getLoadCapacity() {
@@ -84,6 +91,6 @@ public class CargoCar<C> extends Transport implements Drive, Competing {
 
     @Override
     public String toString() {
-        return brand + " " + model + ", тип кузова: " +  "; объём движка " + engineVolume + " л; КПП: " + checkTransmission() + "; " + loadCapacity + "\n";
+        return brand + " " + model + ", тип кузова: " +  "; объём движка " + engineVolume + " л; КПП: " + checkTransmission() + "; " + loadCapacity;
     }
 }

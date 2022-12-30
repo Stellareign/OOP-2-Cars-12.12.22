@@ -71,6 +71,13 @@ private BodyType bodyType; // ДОБАВИЛИ ТИП КУЗОВА, В Т.Ч. В
         }else
             System.out.println("Автомобиль " + brand + " " + model + ": данных по транспортному средству недостаточно.");
     }
+    // == диагностика: ===
+
+    @Override
+    public void Diagnostics() {
+        System.out.println("Автомобиль " + brand + " " + model + " находится на диагностике");
+    }
+
     //==== ГЕТТЕР И СЕТТЕР(?) КУЗОВА: =====
 
     public BodyType getBodyType() {

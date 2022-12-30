@@ -37,6 +37,20 @@ public abstract class Transport implements Competing {
             return "МКПП";
         }
     }
+    // ==== метод ДИАГНОСТИКА от 28.12.22 =======
+    public abstract void Diagnostics();
+// метод для вызова диагностики для нескольких ТС:
+    public static void performDiagnostics(Transport... transports) { // создали массив без определённого количества ячеек
+        for (Transport transport : transports) {
+            try {
+                transport.Diagnostics();
+            } catch (UnsupportedOperationException e) { // при достижении неподдерживаемого объекта вывод сообщения об ошибке.
+                System.out.println("Произошла ошибка");
+                System.out.println(e.getMessage());
+            }
+        }
+    }
+
 
     //    ==== ПЕЧАТЬ tsType: ====
     public void printType() {

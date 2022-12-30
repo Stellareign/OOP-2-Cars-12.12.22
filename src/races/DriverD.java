@@ -4,20 +4,30 @@ import java.util.Objects;
 
 public class DriverD<D extends Bus> extends Driver {
     private D bus;
-       public DriverD(String fio, String drivingCategory, int yearOfPrimaryDriveLicense, D bus) {
+       public DriverD(String fio, String drivingCategory, int yearOfPrimaryDriveLicense, D bus) throws DrivingCategoryException{
         super(fio, drivingCategory, yearOfPrimaryDriveLicense);
-        this.drivingCategory = checkCategory();
+        try {
+               if (drivingCategory == "D") {
+                   this.drivingCategory = drivingCategory;
+               } else {
+                   this.drivingCategory = "недопустимая категория";
+                   throw new DrivingCategoryException("Для водителя " + getFio() + "укажите корректную категорию прав");
+               }
+           }
+        catch (DrivingCategoryException e) {
+               System.out.println(e.getMessage());
+           }
         this.bus = bus;
     }
 
-//======= НЕДОПУСТИМАЯ КАТЕГОРИЯ ========
-    public String checkCategory() {
-               if (drivingCategory == "D") {
-            this.drivingCategory = drivingCategory;
-        } else {
-                   drivingCategory = "недопустимая категория";}
-            return drivingCategory;
-        }
+////======= НЕДОПУСТИМАЯ КАТЕГОРИЯ ========
+//    public String checkCategory() {
+//               if (drivingCategory == "D") {
+//            this.drivingCategory = drivingCategory;
+//        } else {
+//                   drivingCategory = "недопустимая категория";}
+//            return drivingCategory;
+//        }
 
 
     @Override

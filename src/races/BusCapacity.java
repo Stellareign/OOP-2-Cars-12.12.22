@@ -18,7 +18,11 @@ public enum BusCapacity  {
     }
 // ===== ГЕТТЕРЫ: ====
     public String getBusCapacity() {
+        if(busCapacity != null){
         return busCapacity;
+        }else {
+            return "вместимость не указана";
+        }
     }
 
     public Integer getMinCapacity() {
@@ -31,7 +35,7 @@ public enum BusCapacity  {
 // ===== ТУСТРИНГ =====
     @Override
     public String toString() {
-        if (minCapacity == null){
+         if (minCapacity == null){
             return "вместимость " + busCapacity + " до " + maxCapacity + " чел.";
         } else if (maxCapacity == null) {
             return "вместимость " + busCapacity + " от " + minCapacity + " чел.";
