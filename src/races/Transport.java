@@ -3,10 +3,10 @@ package races;
 import java.util.Objects;
 
 public abstract class Transport implements Competing {
-    final String brand;
-    final String model;
-    double engineVolume;
-    private String transmission;
+    private final String brand;
+    private final String model;
+    private double engineVolume;
+    protected String transmission;
     protected String tsType;
 
     public Transport(String brand, String model, double engineVolume, String transmission) {
@@ -86,6 +86,10 @@ public abstract class Transport implements Competing {
 
     public String getTsType() {
         return tsType;
+    }
+
+    public String transmission() {
+        return transmission;
     }
 
     @Override
