@@ -75,7 +75,7 @@ private BodyType bodyType; // ДОБАВИЛИ ТИП КУЗОВА, В Т.Ч. В
 
     @Override
     public void diagnostics() {
-        System.out.println("Автомобиль " + brand + " " + model + " находится на диагностике");
+        System.out.println("Автомобиль " + getBrand() + " " + getModel() + " находится на диагностике");
     }
 
     //==== ГЕТТЕР И СЕТТЕР(?) КУЗОВА: =====
@@ -93,6 +93,26 @@ private BodyType bodyType; // ДОБАВИЛИ ТИП КУЗОВА, В Т.Ч. В
         if (!super.equals(o)) return false;
         PassengCar<?> that = (PassengCar<?>) o;
         return bodyType == that.bodyType;
+    }
+
+    @Override
+    public String getBrand() {
+        return super.getBrand();
+    }
+
+    @Override
+    public String getModel() {
+        return super.getModel();
+    }
+
+    @Override
+    public String getTsType() {
+        return super.getTsType();
+    }
+
+    @Override
+    public String transmission() {
+        return super.transmission();
     }
 
     @Override
