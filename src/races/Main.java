@@ -24,6 +24,7 @@ public class Main {
         System.out.println(iveco);
         System.out.println(reno2);
 
+// ====== ВЫВОД ИНФОРМАЦИИ О ВОДИТЕЛЯХ: =====
 
         System.out.println("\n АВТОБУСЫ: ");
         Bus liaz = new Bus("ЛИАЗ", "CRUISE", 9.29, "МКПП", BusCapacity.MEDIUM);

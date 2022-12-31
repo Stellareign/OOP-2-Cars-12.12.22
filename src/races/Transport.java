@@ -6,7 +6,7 @@ public abstract class Transport implements Competing {
     final String brand;
     final String model;
     double engineVolume;
-    static String transmission;
+    private String transmission;
     protected String tsType;
 
     public Transport(String brand, String model, double engineVolume, String transmission) {
@@ -30,27 +30,26 @@ public abstract class Transport implements Competing {
     }
 
     // ========== ПРОВЕРКА КПП: ==============
-    private static String checkTransmission() {
-        if (transmission == "АКПП" || transmission == "МКПП") {
+    private String checkTransmission() {
+        if (transmission.equals("АКПП") || transmission.equals("МКПП")) {
             return transmission;
         } else {
             return "МКПП";
         }
     }
     // ==== метод ДИАГНОСТИКА от 28.12.22 =======
-    public abstract void Diagnostics();
+    public abstract void diagnostics(); // с переопределением в соотв.классах
 // метод для вызова диагностики для нескольких ТС:
     public static void performDiagnostics(Transport... transports) { // создали массив без определённого количества ячеек
         for (Transport transport : transports) {
             try {
-                transport.Diagnostics();
+                transport.diagnostics();
             } catch (UnsupportedOperationException e) { // при достижении неподдерживаемого объекта вывод сообщения об ошибке.
                 System.out.println("Произошла ошибка");
                 System.out.println(e.getMessage());
             }
         }
     }
-
 
     //    ==== ПЕЧАТЬ tsType: ====
     public void printType() {

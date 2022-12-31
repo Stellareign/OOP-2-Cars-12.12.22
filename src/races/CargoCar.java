@@ -74,7 +74,7 @@ public class CargoCar<C> extends Transport implements Drive, Competing {
     // === диагностика: =====
 
     @Override
-    public void Diagnostics() {
+    public void diagnostics() {
         System.out.println("Грузовик "  + brand + " " + model + " находится на диагностике");
     }
 

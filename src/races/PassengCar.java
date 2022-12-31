@@ -74,7 +74,7 @@ private BodyType bodyType; // ДОБАВИЛИ ТИП КУЗОВА, В Т.Ч. В
     // == диагностика: ===
 
     @Override
-    public void Diagnostics() {
+    public void diagnostics() {
         System.out.println("Автомобиль " + brand + " " + model + " находится на диагностике");
     }
 

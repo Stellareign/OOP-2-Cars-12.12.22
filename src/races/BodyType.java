@@ -25,9 +25,8 @@ enum BodyType {
     public static BodyType checkBodyTypes(String bodyType) {
         for (BodyType bodyType1 : values()) {
             if (bodyType1.getBodyType().equals(bodyType)) {
-
+                return bodyType1; // здесь случайно получился пустой if
             }
-            return bodyType1;
         }
         return null;
     }

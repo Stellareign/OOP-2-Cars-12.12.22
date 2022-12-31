@@ -69,7 +69,7 @@ String capacity;
 // ===== ДИАГНОСТИКА: =======
 
     @Override
-    public void Diagnostics()  {
+    public void diagnostics()  {
         throw new UnsupportedOperationException("для данного вида ТС " + getBrand() + " " + getModel() + " не выполняется диагностика");
     }
 
