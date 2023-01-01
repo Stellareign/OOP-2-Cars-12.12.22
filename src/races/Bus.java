@@ -7,13 +7,6 @@ String capacity;
         super(brand, model, engineVolume, transmission);
         this.busCapacity = busCapacity;
     }
-    // ========== ПРОВЕРКА КПП: ==============
-    private String checkTransmission() {
-        if (!transmission.equals("АКПП") && !transmission.equals("МКПП")) {
-            return "МКПП";
-        }
-        return transmission;
-    }
 
     // ====== ИМПЕЛЕНТАЦИЯ: ======
     @Override
@@ -91,7 +84,7 @@ String capacity;
 
     @Override
     public String toString() {
-        return getBrand()  + " " + getModel() + "; объём движка: " + getEngineVolume() + "; КПП: " + checkTransmission() + "; " + busCapacity + "\n";
+        return getBrand()  + " " + getModel() + "; объём движка: " + getEngineVolume() + "; КПП: " + getTransmission() + "; " + busCapacity + "\n";
     }
 
 }

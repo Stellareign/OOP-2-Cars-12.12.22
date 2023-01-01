@@ -25,18 +25,14 @@ public abstract class Transport implements Competing {
         } else {
             this.engineVolume = 1.5;
         }
-        this.transmission = checkTransmission();
+        if (!transmission.equals("АКПП") && !transmission.equals("МКПП")) {
+            this.transmission = "МКПП";
+        } else{
+        this.transmission = transmission;}
 
     }
 
-    // ========== ПРОВЕРКА КПП: ==============
-    private String checkTransmission() {
-        if (Objects.equals(transmission, "АКПП") || Objects.equals(transmission, "МКПП")) {
-            return transmission;
-        } else {
-            return "МКПП";
-        }
-    }
+
     // ==== метод ДИАГНОСТИКА от 28.12.22 =======
     public abstract void diagnostics(); // с переопределением в соотв. классах.
 // метод для вызова диагностики для нескольких ТС:
@@ -45,7 +41,7 @@ public abstract class Transport implements Competing {
             try {
                 transport.diagnostics();
             } catch (UnsupportedOperationException e) { // при достижении неподдерживаемого объекта вывод сообщения об ошибке.
-                System.out.println("Произошла ошибка");
+                System.out.println("Произошла ошибка:");
                 System.out.println(e.getMessage());
             }
         }
@@ -88,10 +84,6 @@ public abstract class Transport implements Competing {
         return tsType;
     }
 
-    public String transmission() {
-        return transmission;
-    }
-
     public double getEngineVolume() {
         return engineVolume;
     }
@@ -105,13 +97,12 @@ public abstract class Transport implements Competing {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Transport transport = (Transport) o;
-        return Double.compare(transport.engineVolume, engineVolume) == 0 && brand.equals(transport.brand)
-                && model.equals(transport.model) ;
+        return Double.compare(transport.engineVolume, engineVolume) == 0 && brand.equals(transport.brand) && model.equals(transport.model) && transmission.equals(transport.transmission) && tsType.equals(transport.tsType);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(brand, model, engineVolume);
+        return Objects.hash(brand, model, engineVolume, transmission, tsType);
     }
 
     @Override

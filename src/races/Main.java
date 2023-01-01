@@ -15,7 +15,7 @@ public class Main {
         System.out.println(reno1);
 
         System.out.println("\n ГРУЗОВИКИ: ");
-        CargoCar camaz1 = new CargoCar("КАМАЗ", "6520", 12.0, "АКПП", LoadCapacity.N3);
+        CargoCar camaz1 = new CargoCar("КАМАЗ", "6520", 12.0, "", LoadCapacity.N3);
         CargoCar camaz2 = new CargoCar("КАМАЗ", "43509", 13, "АКПП", LoadCapacity.N1);
         CargoCar iveco = new CargoCar("Iveco", "PowerStar", 13, "АКПП", LoadCapacity.N3);
         CargoCar reno2 = new CargoCar("Renault", "K520", 13, "АКПП", LoadCapacity.N2);

@@ -37,14 +37,6 @@ private BodyType bodyType; // ДОБАВИЛИ ТИП КУЗОВА, В Т.Ч. В
                     "Плавно затормозить. \n Переключить передачу на КПП. \n Ну всё, приехали.");}
     }
 
-
-    // ========== ПРОВЕРКА КПП: ==============
-    private String checkTransmission() {
-        if (transmission != "АКПП" && transmission != "МКПП") {
-            return "МКПП";
-        }
-        return transmission;
-    }
 // ======= СОРЕВНУЮЩИЕСЯ методы: ========
     @Override
     public void pitStop() {
@@ -111,19 +103,14 @@ private BodyType bodyType; // ДОБАВИЛИ ТИП КУЗОВА, В Т.Ч. В
     }
 
     @Override
-    public String transmission() {
-        return super.transmission();
-    }
-
-    @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), bodyType);
+        return super.hashCode();
     }
 
     //==== ТУСТРИНГ  ======
 
     @Override
     public String toString() {
-        return getBrand() + " " + getModel() + "; объём движка " + getEngineVolume() + " л; КПП: " + transmission  + "; " + bodyType;
+        return getBrand() + " " + getModel() + "; объём движка " + getEngineVolume() + " л; КПП: " + getTransmission()  + "; " + bodyType;
     }
 }

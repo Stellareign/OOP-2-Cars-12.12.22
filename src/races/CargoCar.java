@@ -1,5 +1,7 @@
 package races;
 
+import java.util.Objects;
+
 public class CargoCar<C> extends Transport implements Drive, Competing {
     private LoadCapacity loadCapacity;
     public CargoCar(String brand, String model, double engineVolume, String transmission, LoadCapacity loadCapacity) {
@@ -33,16 +35,6 @@ public class CargoCar<C> extends Transport implements Drive, Competing {
                     "Плавно затормозить. \n Ну всё, приехали.");
         }
     }
-
-
-    // ========== ПРОВЕРКА КПП: ==============
-    private String checkTransmission() {
-        if (transmission != "АКПП" && transmission != "МКПП") {
-            return "МКПП";
-        }
-        return transmission;
-    }
-
 
     // ====== методы из ТРАНСПОРТа СОРЕВНУЮЩИЕСЯ ======
     @Override
@@ -91,6 +83,6 @@ public class CargoCar<C> extends Transport implements Drive, Competing {
 
     @Override
     public String toString() {
-        return getBrand() + " " + getModel() + ", тип кузова: " +  "; объём движка " + getEngineVolume() + " л; КПП: " + checkTransmission() + "; " + loadCapacity;
+        return getBrand() + " " + getModel() + ", тип кузова: " +  "; объём движка " + getEngineVolume() + " л; КПП: " + getTransmission() + "; " + loadCapacity;
     }
 }
