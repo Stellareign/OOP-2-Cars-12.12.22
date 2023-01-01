@@ -6,16 +6,11 @@ public class DriverC <C extends CargoCar> extends Driver{// implements Drive
 private C cargoCar;
     public DriverC(String fio, String drivingCategory, int yearOfPrimaryDriveLicense,C cargoCar) {
         super(fio, drivingCategory, yearOfPrimaryDriveLicense);
-        try {
-            if (drivingCategory == "C" || drivingCategory == "С") { // почему не работает смена языка????
+            if (drivingCategory.equals("C") || drivingCategory.equals("С")) { // C в разных раскладках, rus & eng
                 this.drivingCategory = drivingCategory;
             } else {
                 this.drivingCategory = "недопустимая категория";
-                throw new DrivingCategoryException("Для водителя " + getFio() + "укажите корректную категорию прав");
-            }
-        }
-        catch (DrivingCategoryException e) {
-            System.out.println(e.getMessage());
+                System.out.println("Для водителя " + getFio() + " укажите корректную категорию прав!");
         }
         this.cargoCar = cargoCar;
     }
@@ -31,19 +26,19 @@ private C cargoCar;
     @Override
     public void startDrive() {
 
-        System.out.println("Завести грузовик " + cargoCar.brand + " " + cargoCar.model + ", начать движение.");
+        System.out.println("Завести грузовик " + cargoCar.getBrand() + " " + cargoCar.getModel() + ", начать движение.");
 
     }
     @Override
 
     public void finishDrive() {
 
-        System.out.println("Остановиться, заглушить двигатель грузовика "+ cargoCar.brand + " " + cargoCar.model + ".");
+        System.out.println("Остановиться, заглушить двигатель грузовика "+ cargoCar.getBrand() + " " + cargoCar.getModel() + ".");
     }
 
     @Override
         public void refuelTheCar() {
-            System.out.println("Открыть бак грузовика " + cargoCar.brand + " " + cargoCar.model + ". \n Вставить заправочный пистолет. \n Нажать курок. \n " +
+            System.out.println("Открыть бак грузовика " + cargoCar.getBrand() + " " + cargoCar.getModel() + ". \n Вставить заправочный пистолет. \n Нажать курок. \n " +
                     "Залить нужное количество топлива. \n Извлечь заправочный пистолет и поместить на место. \n Закрыть бак. \n Расплатиться. ");
         }
 
@@ -74,7 +69,7 @@ private C cargoCar;
 
     @Override
     public String toString() {
-        return super.toString() + ", управляет грузовиком " + cargoCar.brand + " " + cargoCar.model + " и будет участвовать в заезде";
+        return super.toString() + ", управляет грузовиком " + cargoCar.getBrand() + " " + cargoCar.getModel() + " и будет участвовать в заезде";
 
     }
 }

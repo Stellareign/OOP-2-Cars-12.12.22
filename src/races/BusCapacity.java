@@ -1,11 +1,11 @@
 package races;
 
 public enum BusCapacity  {
-    SUPERSMALL("особо малая ",null,10),
-    SMALL ("малая: ", null, 25),
-    MEDIUM("средняя: ", 40, 50),
-    LARGE("большая: ",60, 80),
-    SUPERLARGE("особо большая: ", 100,120);
+    SUPERSMALL("особо малая",null,10),
+    SMALL ("малая", null, 25),
+    MEDIUM("средняя", 40, 50),
+    LARGE("большая",60, 80),
+    SUPERLARGE("особо большая", 100,120);
 
     private String busCapacity;
     private Integer minCapacity;
@@ -36,10 +36,10 @@ public enum BusCapacity  {
     @Override
     public String toString() {
          if (minCapacity == null){
-            return "вместимость " + busCapacity + " до " + maxCapacity + " чел.";
+            return "вместимость " + busCapacity + ": до " + maxCapacity + " чел.";
         } else if (maxCapacity == null) {
-            return "вместимость " + busCapacity + " от " + minCapacity + " чел.";
+            return "вместимость " + busCapacity + ": от " + minCapacity + " чел.";
         } else
-        return "вместимость " + busCapacity + " от " + minCapacity + " до " + maxCapacity + " чел.";
+        return "вместимость " + busCapacity + ": от " + minCapacity + " до " + maxCapacity + " чел.";
     }
 }

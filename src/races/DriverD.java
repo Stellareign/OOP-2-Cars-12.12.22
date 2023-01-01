@@ -6,17 +6,13 @@ public class DriverD<D extends Bus> extends Driver {
     private D bus;
        public DriverD(String fio, String drivingCategory, int yearOfPrimaryDriveLicense, D bus) throws DrivingCategoryException{
         super(fio, drivingCategory, yearOfPrimaryDriveLicense);
-        try {
-               if (drivingCategory == "D") {
+
+               if (drivingCategory.equals("D")) {
                    this.drivingCategory = drivingCategory;
                } else {
                    this.drivingCategory = "недопустимая категория";
-                   throw new DrivingCategoryException("Для водителя " + getFio() + "укажите корректную категорию прав");
+                   System.out.println("Для водителя " + getFio() + " укажите корректную категорию прав!");
                }
-           }
-        catch (DrivingCategoryException e) {
-               System.out.println(e.getMessage());
-           }
         this.bus = bus;
     }
 
@@ -32,16 +28,16 @@ public class DriverD<D extends Bus> extends Driver {
 
     @Override
     public void startDrive() {
-        System.out.println("Завести двигатель автобуса " + bus.brand + " " + bus.model + ", начать движение.");
+        System.out.println("Завести двигатель автобуса " + bus.getBrand() + " " + bus.getModel() + ", начать движение.");
     }
 
     @Override
     public void finishDrive() {
-        System.out.println("Остановиться, заглушить двигатель автобуса " + bus.brand + " " + bus.model + ".");
+        System.out.println("Остановиться, заглушить двигатель автобуса " + bus.getBrand() + " " + bus.getModel() + ".");
     }
     @Override
     public void refuelTheCar() {
-        System.out.println("Открыть бак автобуса " +  bus.brand + " " + bus.model + ". \n Вставить заправочный пистолет. \n Нажать курок. \n " +
+        System.out.println("Открыть бак автобуса " +  bus.getBrand() + " " + bus.getModel() + ". \n Вставить заправочный пистолет. \n Нажать курок. \n " +
                 "Залить нужное количество топлива. \n Извлечь заправочный пистолет и поместить на место. \n Закрыть бак. \n Расплатиться. ");
     }
 // ====== ГЕТТЕРЫ / СЕТТЕРЫ, ИКВАЛС, ХЭШ ====
@@ -70,7 +66,7 @@ public class DriverD<D extends Bus> extends Driver {
 // ===== ТУСТРИНГ =====
     @Override
     public String toString() {
-        return super.toString() + ", управляет автобусом " + bus.brand + " " + bus.model + " и будет участвовать в заезде";
+        return super.toString() + ", управляет автобусом " + bus.getBrand() + " " + bus.getModel() + " и будет участвовать в заезде";
     }
 
 

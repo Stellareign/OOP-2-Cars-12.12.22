@@ -1,7 +1,7 @@
 package races;
 
 public class CargoCar<C> extends Transport implements Drive, Competing {
-    public LoadCapacity loadCapacity;
+    private LoadCapacity loadCapacity;
     public CargoCar(String brand, String model, double engineVolume, String transmission, LoadCapacity loadCapacity) {
         super(brand, model, engineVolume, transmission);
         this.loadCapacity = loadCapacity;
@@ -66,16 +66,16 @@ public class CargoCar<C> extends Transport implements Drive, Competing {
     @Override
     public void printType() {
         if (loadCapacity != null) {
-            System.out.println("Грузовик "  + brand + " " + model + ": " + loadCapacity);
+            System.out.println("Грузовик "  + getBrand() + " " + getModel() + ": " + loadCapacity);
         } else {
-            System.out.println("Грузовик "  + brand + " " + model + ": данных по транспортному средству недостаточно.");
+            System.out.println("Грузовик "  + getBrand() + " " + getModel() + ": данных по транспортному средству недостаточно.");
         }
     }
     // === диагностика: =====
 
     @Override
     public void diagnostics() {
-        System.out.println("Грузовик "  + brand + " " + model + " находится на диагностике");
+        System.out.println("Грузовик "  + getBrand() + " " + getModel() + " находится на диагностике");
     }
 
     // ===== ГЕТТЕР И СЕТТЕР(?) ГРУЗОПОДЪЁМНОСТИ: =====
@@ -91,6 +91,6 @@ public class CargoCar<C> extends Transport implements Drive, Competing {
 
     @Override
     public String toString() {
-        return brand + " " + model + ", тип кузова: " +  "; объём движка " + engineVolume + " л; КПП: " + checkTransmission() + "; " + loadCapacity;
+        return getBrand() + " " + getModel() + ", тип кузова: " +  "; объём движка " + getEngineVolume() + " л; КПП: " + checkTransmission() + "; " + loadCapacity;
     }
 }

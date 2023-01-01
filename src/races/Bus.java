@@ -1,7 +1,7 @@
 package races;
 
 public class Bus<D> extends Transport implements Competing, Drive {
-public BusCapacity busCapacity;
+private BusCapacity busCapacity;
 String capacity;
     public Bus(String brand, String model, double engineVolume, String transmission, BusCapacity busCapacity) {
         super(brand, model, engineVolume, transmission);
@@ -9,7 +9,7 @@ String capacity;
     }
     // ========== ПРОВЕРКА КПП: ==============
     private String checkTransmission() {
-        if (transmission != "АКПП" && transmission != "МКПП") {
+        if (!transmission.equals("АКПП") && !transmission.equals("МКПП")) {
             return "МКПП";
         }
         return transmission;
@@ -41,7 +41,7 @@ String capacity;
 // ====== СОРЕВНУЮЩИЕСЯ: =====
     @Override
     public void pitStop() {
-        System.out.print("В категории D автобус " + getModel() + " " + getBrand() + ": ");
+        System.out.print("В категории D автобус " + getModel() + " " + getBrand() + " ");
         super.pitStop();
     }
 
@@ -61,16 +61,16 @@ String capacity;
     @Override
     public void printType() {
         if (busCapacity != null) {
-            System.out.println("Автобус " + brand + " " + model + ": " + busCapacity);
+            System.out.println("Автобус " + getBrand() + " " + getModel() + ": " + busCapacity + "\n");
         } else {
-            System.out.println("Автобус " + brand + " " + model + ": данных по транспортному средству недостаточно.");
+            System.out.println("Автобус " + getBrand() + " " + getModel() + ": данных по транспортному средству недостаточно.\n");
         }
     }
 // ===== ДИАГНОСТИКА: =======
 
     @Override
     public void diagnostics()  {
-        throw new UnsupportedOperationException("для данного вида ТС " + getBrand() + " " + getModel() + " не выполняется диагностика");
+        throw new UnsupportedOperationException("для данного вида ТС " + getBrand() + " " + getModel() + " не выполняется диагностика \n");
     }
 
     // ===== ГЕТТЕР И СЕТТЕР(?)  ВМЕСТИМОСТИ :
@@ -91,7 +91,7 @@ String capacity;
 
     @Override
     public String toString() {
-        return brand  + " " + model + "; объём движка: " + engineVolume + "; КПП: " + checkTransmission() + "; " + busCapacity + "\n";
+        return getBrand()  + " " + getModel() + "; объём движка: " + getEngineVolume() + "; КПП: " + checkTransmission() + "; " + busCapacity + "\n";
     }
 
 }

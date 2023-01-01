@@ -29,7 +29,7 @@ private BodyType bodyType; // ДОБАВИЛИ ТИП КУЗОВА, В Т.Ч. В
 
     @Override
     public void finishDrive() {
-        if (transmission == "МКПП") {
+        if (transmission.equals("МКПП")) {
             System.out.println(getBrand() + " " + getModel() + ": начать тормозить, нажав на тормоз. \n Нажать сцепление. \n Переключить передачу на КПП. \n " +
                     "Плавно затормозить. \n Отпустить сцепление, поставить на ручник. \n Ну всё, приехали.");}
         else if (transmission == "АКПП") {
@@ -67,9 +67,9 @@ private BodyType bodyType; // ДОБАВИЛИ ТИП КУЗОВА, В Т.Ч. В
     @Override
     public void printType() {
         if(bodyType != null){
-            System.out.println("Автомобиль " + brand + " " + model + ": " + bodyType);
+            System.out.println("Автомобиль " + getBrand() + " " + getModel() + ": " + bodyType);
         }else
-            System.out.println("Автомобиль " + brand + " " + model + ": данных по транспортному средству недостаточно.");
+            System.out.println("Автомобиль " + getBrand() + " " + getModel() + ": данных по транспортному средству недостаточно.");
     }
     // == диагностика: ===
 
@@ -124,6 +124,6 @@ private BodyType bodyType; // ДОБАВИЛИ ТИП КУЗОВА, В Т.Ч. В
 
     @Override
     public String toString() {
-        return brand + " " + model + "; объём движка " + engineVolume + " л; КПП: " + transmission  + "; " + bodyType;
+        return getBrand() + " " + getModel() + "; объём движка " + getEngineVolume() + " л; КПП: " + transmission  + "; " + bodyType;
     }
 }

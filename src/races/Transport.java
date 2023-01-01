@@ -6,7 +6,7 @@ public abstract class Transport implements Competing {
     private final String brand;
     private final String model;
     private double engineVolume;
-    protected String transmission;
+    protected final String transmission;
     protected String tsType;
 
     public Transport(String brand, String model, double engineVolume, String transmission) {
@@ -31,14 +31,14 @@ public abstract class Transport implements Competing {
 
     // ========== ПРОВЕРКА КПП: ==============
     private String checkTransmission() {
-        if (transmission.equals("АКПП") || transmission.equals("МКПП")) {
+        if (Objects.equals(transmission, "АКПП") || Objects.equals(transmission, "МКПП")) {
             return transmission;
         } else {
             return "МКПП";
         }
     }
     // ==== метод ДИАГНОСТИКА от 28.12.22 =======
-    public abstract void diagnostics(); // с переопределением в соотв.классах
+    public abstract void diagnostics(); // с переопределением в соотв. классах.
 // метод для вызова диагностики для нескольких ТС:
     public static void performDiagnostics(Transport... transports) { // создали массив без определённого количества ячеек
         for (Transport transport : transports) {
@@ -54,7 +54,7 @@ public abstract class Transport implements Competing {
     //    ==== ПЕЧАТЬ tsType: ====
     public void printType() {
         if (tsType == null || tsType.isBlank() || tsType.isEmpty()) {
-            System.out.println("Данных по транспортному средству недостаточно");
+            System.out.println("Данных по транспортному средству недостаточно \n");
         } else
             System.out.println(tsType);
     }
@@ -62,17 +62,17 @@ public abstract class Transport implements Competing {
 
     @Override
     public void pitStop() {
-        System.out.println(" меняем покрышки в мега быстром режиме и гоним дальше!");
+        System.out.println(" меняем покрышки в мега быстром режиме и гоним дальше! \n");
     }
 
     @Override
     public void bestTimeOfLap() {
-        System.out.println(" показал лучшее время, мин.: ");
+        System.out.println(" показал лучшее время, мин.: \n");
     }
 
     @Override
     public void maxSpeed() {
-        System.out.println(" развил максимальную скорость, км/ч: ");
+        System.out.println(" развил максимальную скорость, км/ч: \n");
     }
 
     // ======ГЕТТЕРЫ: ============
@@ -89,6 +89,14 @@ public abstract class Transport implements Competing {
     }
 
     public String transmission() {
+        return transmission;
+    }
+
+    public double getEngineVolume() {
+        return engineVolume;
+    }
+
+    public String getTransmission() {
         return transmission;
     }
 
