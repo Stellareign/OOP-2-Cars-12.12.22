@@ -15,10 +15,10 @@ public class CargoCar<C> extends Transport implements Drive, Competing {
     // ======= движение: ==========
     @Override
     public void startDrive() {
-        if (transmission == "МКПП") {
+        if (transmission.equals("МКПП")) {
             System.out.println(getBrand() + " " + getModel() + ": вставить ключ зажигания. \n Выжать сцепление, снять с ручника. \n Повернуть ключ. \n Переключить передачу на КПП. \n " +
                     "Нажать на газ \n Плавно отпустить сцепление. \n Погнали!");
-        } else if (transmission == "АКПП") {
+        } else if (transmission.equals("АКПП")) {
             System.out.println("Вставить ключ зажигания. \n Повернуть ключ. \n Переключить передачу на КПП. \n " +
                     "Нажать на газ. \n Погнали!");
         }
@@ -27,10 +27,10 @@ public class CargoCar<C> extends Transport implements Drive, Competing {
 
     @Override
     public void finishDrive() {
-        if (transmission == "МКПП") {
+        if (transmission.equals("МКПП")) {
             System.out.println(getBrand() + " " + getModel() + ": начать тормозить, нажав на тормоз. \n Нажать сцепление. \n Переключить передачу на КПП. \n " +
                     "Плавно затормозить. \n Отпустить сцепление, поставить на ручник. \n Ну всё, приехали.");
-        } else if (transmission == "АКПП") {
+        } else if (transmission.equals("АКПП")) {
             System.out.println("Начать тормозить, нажав на тормоз. \n Переключить передачу на КПП. \n " +
                     "Плавно затормозить. \n Ну всё, приехали.");
         }
