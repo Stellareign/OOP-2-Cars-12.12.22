@@ -15,8 +15,9 @@ public class PassengCar<B> extends Transport implements Drive, Competing {
     private ServiceTransport serviceTransport;
     List<Mechanic> mechanics = new ArrayList<>(); // добавляем листы водителей и механиков для использования
     List<Driver> drivers = new ArrayList<>();
+    //private Driver driverB;
 
-    public PassengCar(String brand, String model, double engineVolume, String transmission, BodyType bodyType, List<Mechanic> mechanics) {
+    public PassengCar(String brand, String model, double engineVolume, String transmission, BodyType bodyType, ArrayList<Mechanic> mechanics) {
         super(brand, model, engineVolume, transmission, mechanics);
         this.bodyType = bodyType;
     }
@@ -64,7 +65,7 @@ public class PassengCar<B> extends Transport implements Drive, Competing {
         super.maxSpeed();
     }
 
-    // ====== переопределение ТРАНСПОРТ: ====
+    // ====== ПЕРЕОПРЕДЕЛЕНИЕ ТРАНСПОРТ: ====
     @Override
     public void printType() {
         if (bodyType != null) {
@@ -72,77 +73,82 @@ public class PassengCar<B> extends Transport implements Drive, Competing {
         } else
             System.out.println("Автомобиль " + getBrand() + " " + getModel() + ": данных по транспортному средству недостаточно.");
     }
-    // == диагностика: ===
+    // == ДИАГНОСТИКА: ===
 
     @Override
     public void diagnostics() {
         System.out.println("Автомобиль " + getBrand() + " " + getModel() + " находится на диагностике");
     }
-    // ==== СОЗДАНИЕ КОМАНДЫ МЕХАНИКОВ: ====
+    // ==== СОЗДАНИЕ КОМАНДЫ МЕХАНИКОВ, добавление водителя и печать: ====
 
     @Override
     public void creatingMechanicsTeam(Mechanic... mechanics) {
-        super.creatingMechanicsTeam(mechanics);
+        ArrayList<Mechanic> mechanicsTeam = new ArrayList<>();
+        for (Mechanic value : mechanics)  // value => это переменная листа: mechanic1 и т.д.
+            if (value.getServiceTransport() == ServiceTransport.PassCars ||
+                    value.getServiceTransport() == ServiceTransport.MultiSpec) { // вытаскиаем нужный параметр для "фильтра"
+                mechanicsTeam.add(value);
+            }
+                System.out.println("\n Автомобиль " + getBrand() + " " + getModel() + " " + getEngineVolume() + " л обслуживает команда механиков: ");
+                mechanicsTeam.forEach(System.out::println);
     }
-// ===== ВЫВОД НА ПЕЧАТЬ ВОДИТЕЛЕЙ И МЕХАНИКОВ
+//             else  {
+//                System.out.println("\n Автомобиль " + getBrand() + " " + getModel() + " " + getEngineVolume() + " л обслуживает команда механиков: " +
+//                        "команда не сформирована.");
+//            }
+
+
 
     @Override
-    public void printInfoTeam() {
-        if (mechanics != null || drivers != null) {
-            for (Mechanic mechanic : mechanics) {
-                if (mechanic.getServiceTransport() == ServiceTransport.PassCars || mechanic.getServiceTransport() == ServiceTransport.MultiSpec &&
-                        mechanics.size() < 4) {
-                    System.out.println("Автомобиль " + getBrand() + " " + getModel() + " объём двигателя " + getEngineVolume() +
-                            "л обслуживается командой механиков: " + mechanics);
-                } else {
-                    System.out.println("У автомобиля " + getBrand() + " " + getModel() + " объём двигателя " + getEngineVolume() +
-                            "л не сформирована команда механиков.");
-                    for (Driver driver : drivers) {
-                        System.out.println("Автомобиль " + getBrand() + " " + getModel() + " объём двигателя " + getEngineVolume() +
-                                "л управляется водителем " + driver.getFio());
-                    }
-                }
+    public void creatingDriver(Driver... drivers) {
+        ArrayList<Driver> pilot = new ArrayList<>();
+        for (Driver value : drivers) {
+            if (value.getDrivingCategory().equals("B") || value.getDrivingCategory().equals("В") && pilot.size() <2) {
+                pilot.add(value);
+                System.out.println("\n Автомобилем " + getBrand() + " " + getModel() + " управляет водитель: " );
+                pilot.forEach(System.out::println);
+            } else {
+                System.out.println("\n Автомобилем " + getBrand() + " " + getModel() + " " + getEngineVolume() + " л управляет водитель: ");
+                System.out.println("Данных о водителе недостаточно или неверно указана информация");
             }
-        } else {
-            System.out.println("Отсутствует информация о команде ТС");
         }
     }
 
+// ===== ВЫВОД НА ПЕЧАТЬ ВОДИТЕЛЕЙ И МЕХАНИКОВ
 
+//    @Override
+//    public void printInfoTeam() {//List<Driver> driverList, List<Mechanic> mechanics
+//        if (mechanics != null || drivers != null) {
+//            for (Mechanic mechanic : mechanics) {
+//                if (mechanic.getServiceTransport() == ServiceTransport.PassCars || mechanic.getServiceTransport() == ServiceTransport.MultiSpec &&
+//                        mechanics.size() < 4) {
+//                    System.out.println("Автомобиль " + getBrand() + " " + getModel() + " объём двигателя " + getEngineVolume() +
+//                            "л обслуживается командой механиков: ");
+//                    creatingMechanicsTeam();
+//
+//                } else {
+//                    System.out.println("У автомобиля " + getBrand() + " " + getModel() + " объём двигателя " + getEngineVolume() +
+//                            "л не сформирована команда механиков.");
+//                }
+////                for (Driver driver : drivers) {
+//
+//                System.out.println("Автомобиль " + getBrand() + " " + getModel() + " объём двигателя " + getEngineVolume() +
+//                        " л управляется водителем " + ;
+//            }
+//
+//        } else {
+//            System.out.println("Отсутствует информация о команде ТС");
+//        }
+//    }
 
-    //==== ГЕТТЕР И СЕТТЕР(?) КУЗОВА: =====
+    //==== ГЕТТЕР КУЗОВА: =====
 
     public BodyType getBodyType() {
         return bodyType;
     }
 
-    public ServiceTransport getServiceTransport() {
-        return serviceTransport;
-    }
 
-    public PassengCar<B> setServiceTransport(ServiceTransport serviceTransport) {
-        this.serviceTransport = serviceTransport;
-        return this;
-    }
 
-    @Override
-    public ArrayList<Mechanic> getMechanics() {
-        return (ArrayList<Mechanic>) mechanics;
-    }
-
-    public PassengCar<B> setMechanics(List<Mechanic> mechanics) {
-        this.mechanics = mechanics;
-        return this;
-    }
-
-    public List<Driver> getDrivers() {
-        return drivers;
-    }
-
-    public PassengCar<B> setDrivers(List<Driver> drivers) {
-        this.drivers = drivers;
-        return this;
-    }
     // ===== ИКВАЛС + ХЭШ =======
 
     @Override
@@ -174,11 +180,15 @@ public class PassengCar<B> extends Transport implements Drive, Competing {
         return super.hashCode();
     }
 
-    //==== ТУСТРИНГ  ======
+//==== ТУСТРИНГ  ======
 
 
     @Override
     public String toString() {
-        return getBrand() + " " + getModel() + "; объём движка " + getEngineVolume() + " л; КПП: " + getTransmission()  + "; " + bodyType + ", водитель: " ;
+        return getBrand() + " " + getModel() + "; объём движка " + getEngineVolume() + " л; КПП: " + getTransmission()  +
+                "; " + bodyType + "; команда механиков: " + getMechanics();
     }
 }
+
+
+

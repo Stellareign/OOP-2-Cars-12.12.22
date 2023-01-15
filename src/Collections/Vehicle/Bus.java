@@ -2,20 +2,22 @@ package Collections.Vehicle;
 
 import Collections.Competing;
 import Collections.Drive;
+import Collections.Drivers.Driver;
 import Collections.Mechanics.Mechanic;
 import Collections.Mechanics.ServiceTransport;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Bus<D> extends Transport implements Competing, Drive {
     private BusCapacity busCapacity;
-
-    public Bus(String brand, String model, double engineVolume, String transmission,BusCapacity busCapacity, List<Mechanic> mechanics) {
+    List<Mechanic> mechanics = new ArrayList<>();
+    List<Driver> drivers = new ArrayList<>();
+    public Bus(String brand, String model, double engineVolume, String transmission, BusCapacity busCapacity, ArrayList<Mechanic> mechanics) {
         super(brand, model, engineVolume, transmission, mechanics);
         this.busCapacity = busCapacity;
 
     }
-
 
     // ====== ИМПЕЛЕНТАЦИЯ: ======
     @Override
@@ -78,10 +80,34 @@ public class Bus<D> extends Transport implements Competing, Drive {
     // ====== ПЕЧАТЬ КОМАНДЫ: ====
 
     @Override
-    public void printInfoTeam() {
+    public void creatingMechanicsTeam(Mechanic... mechanics) {
+        ArrayList<Mechanic> mechanicsTeam = new ArrayList<>();
+        for (Mechanic value : mechanics) // value => это переменная листа: mechanic1 и т.д.
+            if (value.getServiceTransport() == ServiceTransport.Buses ||
+                    value.getServiceTransport() == ServiceTransport.MultiSpec) { // вытаскиаем нужный параметр
+                mechanicsTeam.add(value);
+            }
+                System.out.println("\n Автобус " + getBrand() + " " + getModel() + ", " + getBusCapacity() + " чел. обслуживает команда механиков: ");
+                mechanicsTeam.forEach(System.out::println); // синтаксис листа. Данный метод выводит столбиком список листа.
+//            } else {
+//                System.out.println("\n Автобус " + getBrand() + " " + getModel() + ", " + getBusCapacity() + " чел. обслуживает команда механиков: команда не сформирована");
+            }//
 
-    }
 
+    @Override
+    public void creatingDriver(Driver... drivers) {
+                   ArrayList<Driver> pilot = new ArrayList<>();
+            for (Driver value : drivers) {
+                if (value.getDrivingCategory().equals("D") && pilot.size() <2) {
+                    pilot.add(value);
+                    System.out.println("\n Автобусом " + getBrand() + " " + getModel() + " " + getBusCapacity() + " чел. управляет водитель: ");
+                    pilot.forEach(System.out::println);
+                } else {
+                    System.out.println("\n Автобусом " + getBrand() + " " + getModel() + " " + getBusCapacity() + " чел. управляет водитель: ");
+                    System.out.println("Данных о водителе недостаточно или неверно указана информация");
+                }
+            }
+        }
 
     // ===== ГЕТТЕР И СЕТТЕР(?)  ВМЕСТИМОСТИ :
 
@@ -93,7 +119,7 @@ public class Bus<D> extends Transport implements Competing, Drive {
     @Override
     public String toString() {
         return getBrand() + " " + getModel() + "; объём движка: " + getEngineVolume() + "; КПП: " +
-                getTransmission() + "; " + busCapacity + "\n" + ", команда механиков: " + getMechanics();
+                getTransmission() + "; " + busCapacity;//+ ", команда механиков: " + getMechanics()
     }
 
 }

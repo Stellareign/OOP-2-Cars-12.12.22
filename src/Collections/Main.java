@@ -6,6 +6,7 @@ import Collections.Drivers.DriverC;
 import Collections.Drivers.DriverD;
 import Collections.Mechanics.Mechanic;
 import Collections.Mechanics.ServiceTransport;
+import Collections.Mechanics.TechServiceStation;
 import Collections.Vehicle.*;
 
 import java.util.ArrayList;
@@ -13,26 +14,27 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-    List<Mechanic> mechanicsTeamList = new ArrayList<>();
-        List<Mechanic> mech2 = new ArrayList<>();
+    ArrayList<Mechanic> mechanicsBTeamList = new ArrayList<>();
+    ArrayList<Mechanic> mechanicsCTeamList = new ArrayList<>();
+    ArrayList<Mechanic> mechanicsDTeamList = new ArrayList<>();
 
 
         System.out.println("****** ЛЕГКОВЫЕ АВТО: *********************************");
-        PassengCar kia = new PassengCar("KIA", "RIO", 1.6, "МКПП", BodyType.HATCHBACK, mechanicsTeamList);
-        PassengCar ford = new PassengCar("Ford", "Mustang VI", 2.3, "АКПП", BodyType.COUPE, mechanicsTeamList);
-        PassengCar lada = new PassengCar("ВАЗ", "LADA Vesta Sport", 1.8, "МКПП", BodyType.SEDAN, mechanicsTeamList);
-        PassengCar reno1 = new PassengCar("RENOULT", "Arcana", 1.6, "МКПП", BodyType.HATCHBACK, mechanicsTeamList);
-        PassengCar kia2 = new PassengCar("KIA", "RIO", 1.6, "МКПП", BodyType.HATCHBACK, mech2);
+        PassengCar kia = new PassengCar("KIA", "RIO", 1.6, "МКПП", BodyType.HATCHBACK, mechanicsBTeamList);
+        PassengCar ford = new PassengCar("Ford", "Mustang VI", 2.3, "АКПП", BodyType.COUPE, mechanicsBTeamList);
+        PassengCar lada = new PassengCar("ВАЗ", "LADA Vesta Sport", 1.8, "МКПП", BodyType.SEDAN, mechanicsBTeamList);
+        PassengCar reno1 = new PassengCar("RENOULT", "Arcana", 1.6, "МКПП", BodyType.HATCHBACK, mechanicsBTeamList);
+
         System.out.println(kia);
         System.out.println(ford);
         System.out.println(lada);
         System.out.println(reno1);
 
         System.out.println("\n ======= ГРУЗОВИКИ: ============================");
-        CargoCar camaz1 = new CargoCar("КАМАЗ", "6520", 12.0, "", LoadCapacity.N3, mechanicsTeamList);
-        CargoCar camaz2 = new CargoCar("КАМАЗ", "43509", 13, "АКПП", LoadCapacity.N1, mechanicsTeamList);
-        CargoCar iveco = new CargoCar("Iveco", "PowerStar", 13, "АКПП", LoadCapacity.N3, mechanicsTeamList);
-        CargoCar reno2 = new CargoCar("Renault", "K520", 13, "АКПП", LoadCapacity.N2,mechanicsTeamList);
+        CargoCar camaz1 = new CargoCar("КАМАЗ", "6520", 12.0, "", LoadCapacity.N3, mechanicsCTeamList);
+        CargoCar camaz2 = new CargoCar("КАМАЗ", "43509", 13, "АКПП", LoadCapacity.N1, mechanicsCTeamList);
+        CargoCar iveco = new CargoCar("Iveco", "PowerStar", 13, "АКПП", LoadCapacity.N3, mechanicsCTeamList);
+        CargoCar reno2 = new CargoCar("Renault", "K520", 13, "АКПП", LoadCapacity.N2,mechanicsCTeamList);
         System.out.println(camaz1);
         System.out.println(camaz2);
         System.out.println(iveco);
@@ -41,10 +43,10 @@ public class Main {
 // ====== ВЫВОД ИНФОРМАЦИИ О ВОДИТЕЛЯХ: =====
 
         System.out.println("\n ======== АВТОБУСЫ: ================================");
-        Bus liaz = new Bus("ЛИАЗ", "CRUISE", 9.29, "МКПП", BusCapacity.MEDIUM, mechanicsTeamList);
-        Bus paz = new Bus("ПАЗ", "3237", 4.5, "АКПП", BusCapacity.LARGE, mechanicsTeamList);
-        Bus gazel = new Bus("ГАЗ", "ГАЗель NEXT", 2.9, "63", BusCapacity.SMALL, mechanicsTeamList); // проверка метода КПП
-        Bus camazBus = new Bus("КАМАЗ", "НЕФАЗ-5299-17-52", 6.7, "АКПП", null, mechanicsTeamList);
+        Bus liaz = new Bus("ЛИАЗ", "CRUISE", 9.29, "МКПП", BusCapacity.MEDIUM, mechanicsDTeamList);
+        Bus paz = new Bus("ПАЗ", "3237", 4.5, "АКПП", BusCapacity.LARGE, mechanicsDTeamList);
+        Bus gazel = new Bus("ГАЗ", "ГАЗель NEXT", 2.9, "63", BusCapacity.SMALL, mechanicsDTeamList); // проверка КПП
+        Bus camazBus = new Bus("КАМАЗ", "НЕФАЗ-5299-17-52", 6.7, "АКПП", null, mechanicsDTeamList);
         System.out.println(liaz);
         System.out.println(paz);
         System.out.println(gazel);
@@ -58,7 +60,7 @@ public class Main {
 //
 //        // ===== ВОДИТЕЛИ =========
 //        // Категория В:
-        Driver driverB1 = new DriverB<PassengCar>(" ", "C", 2020, kia);
+        Driver driverB1 = new DriverB<PassengCar>("Ковров Е.Б.", "C", 2020, kia);
         Driver driverB2 = new DriverB<PassengCar>("Овчинников А.Е.", "B", 1990, ford);
         Driver driverB3 = new DriverB<PassengCar>("Малков А.С.", "v", 1995, lada);
         Driver driverB4 = new DriverB<PassengCar>("Семёнова Е.Г", "B", 2023, reno1); // проверка года стажа
@@ -190,26 +192,57 @@ public class Main {
         Mechanic mechanic7= new Mechanic(
                 "Купцов",
                 "Артём",
-                "Top gear",
+                "TopBus",
+                ServiceTransport.Buses);
+        Mechanic mechanic8= new Mechanic(
+                "Панов",
+                "Алексей",
+                "TopBus",
                 ServiceTransport.Buses);
         System.out.println("\n ****** МЕХАНИКИ: ***********************");
-        mechanicsTeamList.add(mechanic1); // легков.
-        mechanicsTeamList.add(mechanic2); // легков.
-        mechanicsTeamList.add(mechanic3); // грузов.
-        mechanicsTeamList.add(mechanic4); // мульти.
-        mechanicsTeamList.add(mechanic5); // мульти.
-        mechanicsTeamList.add(mechanic6); // грузов.
-        mechanicsTeamList.add(mechanic7); // автобус
+        mechanicsBTeamList.add(mechanic1); // легков.
+        mechanicsBTeamList.add(mechanic2); // легков.
+        mechanicsBTeamList.add(mechanic4); // мульти.
 
-// ======== СОЗДАЁМ КОМАНДЫ МЕХАНИКОВ ДЛЯ АВТО ========
-        kia.creatingMechanicsTeam(mechanic1, mechanic2, mechanic4);
-        camaz2.creatingMechanicsTeam(mechanic4, mechanic3, mechanic6);
+        mechanicsCTeamList.add(mechanic3); // грузов.
+        mechanicsCTeamList.add(mechanic6); // грузов.
+        mechanicsCTeamList.add(mechanic4); // мульти.
+        mechanicsCTeamList.add(mechanic5); // мульти.
+
+        mechanicsDTeamList.add(mechanic7); // автобус
+        mechanicsDTeamList.add(mechanic4); // мульти.
+        mechanicsDTeamList.add(mechanic5); // мульти.
+        mechanicsDTeamList.add(mechanic8); // автобус
+//        System.out.println(mechanicsTeamList);
+
+// ======== СОЗДАЁМ КОМАНДЫ МЕХАНИКОВ  и водителя ДЛЯ АВТО ========
+        System.out.println("\n ****** КОМАНАДЫ МЕХАНИКОВ ******************");
+        System.out.println("*********** Команда  для автомобиля " + kia.getBrand() +" " + kia.getModel() + ":");
+        kia.creatingMechanicsTeam(mechanic1, mechanic2);
+        kia.creatingDriver(driverB1);
+
+
+        System.out.println("\n *********** Команда механиков для грузовика: " + camazBus.getBrand() +" " + camaz2.getModel() + ":");
+        iveco.creatingMechanicsTeam(mechanic4, mechanic3);
+        iveco.creatingDriver(driverC3);
+
+
+        System.out.println("\n  *********** Команда механиков для автобуса:"  + camazBus.getBrand() + " " + camazBus.getModel() + ":");
         camazBus.creatingMechanicsTeam(mechanic7, mechanic5, mechanic4);
+        camazBus.creatingDriver(driverD4);
 
-        // ===== ПЕЧАТЬ ИНФО о комадке авто: ===
-        System.out.println("\n ===== ПЕЧАТЬ ИНФО о КОМАНДЕ: ===========================");
-        kia.printInfoTeam();
-        System.out.println(kia2);
+// ========= создаём СТО, проводим ТО:
+        System.out.println("/n ********* проводим ТО на СТО *************");
+        TechServiceStation sto = new TechServiceStation();
+        sto.addTransport(reno1);
+        sto.addTransport(reno2);
+        sto.addTransport(kia);
+        sto.addTransport(camaz1);
+        sto.addTransport(camaz2);
+        sto.addTransport(camazBus);
+        sto.maintenanceCar();
+
+        }
 
     }
-}
+
