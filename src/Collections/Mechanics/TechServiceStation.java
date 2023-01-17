@@ -19,10 +19,10 @@ public class TechServiceStation {
 
     public void maintenanceCar() { // метод ТО из класса Mechanic
         Transport transport = transportQueue.poll(); // "достаём" из очереди объект
-        for (Transport transport1 : transportQueue)
+        for (Transport transport1 : transportQueue){
         if (transport != null) {
-            transport.getMechanics().get(0).maintenanceCar();}
-        System.out.println("\n Следующие ТС находятся на ТО:");
+            transport1.getMechanics().get(1).maintenanceCar();}
+        System.out.println("\n Следующие ТС находятся на ТО:");}
                transportQueue.stream().forEach(System.out::println);
     }
 }

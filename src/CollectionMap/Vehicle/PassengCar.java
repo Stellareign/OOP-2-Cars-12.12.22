@@ -1,24 +1,27 @@
-package Collections.Vehicle;
+package CollectionMap.Vehicle;
 
-import Collections.Competing;
-import Collections.Drive;
-import Collections.Drivers.Driver;
-import Collections.Mechanics.Mechanic;
-import Collections.Mechanics.ServiceTransport;
+import CollectionMap.Competing;
+import CollectionMap.Drive;
+import CollectionMap.Drivers.Driver;
+import CollectionMap.Mechanics.Mechanic;
+import CollectionMap.Mechanics.ServiceTransport;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class PassengCar<B> extends Transport implements Drive, Competing {
     private BodyType bodyType; // ДОБАВИЛИ ТИП КУЗОВА, В Т.Ч. В КОНСТРУКТОР
     //    private ArrayList<Mechanic> mechanics;
     private ServiceTransport serviceTransport;
-    List<Mechanic> mechanics = new ArrayList<>(); // добавляем листы водителей и механиков для использования
-    List<Driver> drivers = new ArrayList<>();
+    private List<Mechanic> mechanics = new ArrayList<>(); // добавляем листы водителей и механиков для использования
+    private List<Driver> drivers = new ArrayList<>();
+    private Map<Transport, Mechanic> transportMechanicMap = new HashMap<>();
     //private Driver driverB;
 
-    public PassengCar(String brand, String model, double engineVolume, String transmission, BodyType bodyType, ArrayList<Mechanic> mechanics) {
-        super(brand, model, engineVolume, transmission, mechanics);
+    public PassengCar(String brand, String model, double engineVolume, String transmission, BodyType bodyType, Map<Transport, Mechanic> transportMechanicMap) {
+        super(brand, model, engineVolume, transmission, transportMechanicMap);
         this.bodyType = bodyType;
     }
 
@@ -84,14 +87,16 @@ public class PassengCar<B> extends Transport implements Drive, Competing {
     @Override
     public void creatingMechanicsTeam(Mechanic... mechanics) {
         ArrayList<Mechanic> mechanicsTeam = new ArrayList<>();
-        for (Mechanic value : mechanics)  // value => это переменная листа: mechanic1 и т.д.
+        for (Mechanic value : mechanics) { // value => это переменная листа: mechanic1 и т.д.
             if (value.getServiceTransport() == ServiceTransport.PassCars ||
                     value.getServiceTransport() == ServiceTransport.MultiSpec) { // вытаскиаем нужный параметр для "фильтра"
                 mechanicsTeam.add(value);
             }
-                System.out.println("\n Автомобиль " + getBrand() + " " + getModel() + " " + getEngineVolume() + " л обслуживает команда механиков: ");
-                mechanicsTeam.forEach(System.out::println);
-    }
+        }
+            System.out.println("\n Автомобиль " + getBrand() + " " + getModel() + " " + getEngineVolume() + " л обслуживает команда механиков: ");
+            mechanicsTeam.forEach(System.out::println);
+        }
+
 //             else  {
 //                System.out.println("\n Автомобиль " + getBrand() + " " + getModel() + " " + getEngineVolume() + " л обслуживает команда механиков: " +
 //                        "команда не сформирована.");
@@ -176,6 +181,11 @@ public class PassengCar<B> extends Transport implements Drive, Competing {
     }
 
     @Override
+    public Map<Transport, Mechanic> getTransportMechanicMap() {
+        return transportMechanicMap;
+    }
+
+    @Override
     public int hashCode() {
         return super.hashCode();
     }
@@ -186,7 +196,7 @@ public class PassengCar<B> extends Transport implements Drive, Competing {
     @Override
     public String toString() {
         return "Легковой автомобиль " + getBrand() + " " + getModel() + "; объём движка " + getEngineVolume() + " л; КПП: " + getTransmission()  +
-                "; " + bodyType + "; команда механиков: " + getMechanics();
+                "; " + bodyType + "; команда механиков: " + getTransportMechanicMap();
     }
 }
 

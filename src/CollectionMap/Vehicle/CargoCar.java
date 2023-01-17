@@ -1,21 +1,24 @@
-package Collections.Vehicle;
+package CollectionMap.Vehicle;
 
-import Collections.Competing;
-import Collections.Drive;
-import Collections.Drivers.Driver;
-import Collections.Mechanics.Mechanic;
-import Collections.Mechanics.ServiceTransport;
+import CollectionMap.Competing;
+import CollectionMap.Drive;
+import CollectionMap.Drivers.Driver;
+import CollectionMap.Mechanics.Mechanic;
+import CollectionMap.Mechanics.ServiceTransport;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class CargoCar<C> extends Transport implements Drive, Competing {
     private LoadCapacity loadCapacity;
-    List<Mechanic> mechanics = new ArrayList<>();
-    List<Driver> drivers = new ArrayList<>();
+    private List<Mechanic> mechanics = new ArrayList<>();
+    private List<Driver> drivers = new ArrayList<>();
+    private Map<Transport, Mechanic> transportMechanicMap = new HashMap<>();
 
-    public CargoCar(String brand, String model, double engineVolume, String transmission, LoadCapacity loadCapacity, ArrayList<Mechanic> mechanics) {
-        super(brand, model, engineVolume, transmission, mechanics);
+    public CargoCar(String brand, String model, double engineVolume, String transmission, LoadCapacity loadCapacity, Map<Transport, Mechanic> transportMechanicMap) {
+        super(brand, model, engineVolume, transmission, transportMechanicMap);
         this.loadCapacity = loadCapacity;
     }
 
@@ -131,8 +134,19 @@ public class CargoCar<C> extends Transport implements Drive, Competing {
     }
 
     @Override
+    public Map<Transport, Mechanic> getTransportMechanicMap() {
+        return transportMechanicMap;
+    }
+
+    @Override
+    public CargoCar<C> setTransportMechanicMap(Map<Transport, Mechanic> transportMechanicMap) {
+        this.transportMechanicMap = transportMechanicMap;
+        return this;
+    }
+
+    @Override
     public String toString() {
         return "Грузовик " + getBrand() + " " + getModel() + ": объём движка " + getEngineVolume() + " л; КПП: " +
-                getTransmission() + "; " + loadCapacity + ", команда механиков: " + getMechanics();
+                getTransmission() + "; " + loadCapacity + ", команда механиков: " + getTransportMechanicMap();
     }
 }

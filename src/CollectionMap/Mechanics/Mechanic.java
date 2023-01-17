@@ -1,9 +1,4 @@
-package Collections.Mechanics;
-
-import Collections.Vehicle.Bus;
-import Collections.Vehicle.CargoCar;
-import Collections.Vehicle.PassengCar;
-import Collections.Vehicle.Transport;
+package CollectionMap.Mechanics;
 
 import java.util.Objects;
 
