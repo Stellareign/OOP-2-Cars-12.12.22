@@ -284,7 +284,7 @@ public class Main {
 //        allDriversSet.add(driverD3);
 //        allDriversSet.add(driverD4);
 
-        System.out.println("Список всех водителей (через итератор): "); // не работает с несколькими полями
+        System.out.println("Список всех водителей (через итератор): "); // не работает с несколькими полями, либо выводить со всем данными, либо только с чем-то одним, например ФИО
 
         Iterator<Driver> itr = allDriversSet.iterator(); // итерируемся по сету с помощью метода итератора, можно записать прямо так: Iterator itr = allDriversSet.iterator(), но яве так не особо "нравится"
        {
