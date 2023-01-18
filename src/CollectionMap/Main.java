@@ -9,10 +9,7 @@ import CollectionMap.Mechanics.ServiceTransport;
 import CollectionMap.Mechanics.TechServiceStation;
 import CollectionMap.Vehicle.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -271,7 +268,40 @@ public class Main {
 
         sto.doMaintenanceCar();
         System.out.println(sto.getTransportQueue());
-        }
+        // ======= СОЗДАЁМ SET ВОДИТЕЛЕЙ: =============
+        Set<Driver> allDriversSet = new HashSet<>(allDrivers); // создаём сет всех водителей - хэш-множество: можно добавить лист, можно по отдельности
+        allDriversSet.add(driverB1); // добавляем дубли
+        allDriversSet.add(driverB2);
+//        allDriversSet.add(driverB3);
+//        allDriversSet.add(driverB4);
+//        allDriversSet.add(driverC3);
+//        allDriversSet.add(driverC4);
+//        allDriversSet.add(driverC2);
+//        allDriversSet.add(driverB1); // дублируем водителя для проверки "неповтора"
+//        allDriversSet.add(driverC1);
+//        allDriversSet.add(driverD1);
+//        allDriversSet.add(driverD2);
+//        allDriversSet.add(driverD3);
+//        allDriversSet.add(driverD4);
 
+        System.out.println("Список всех водителей (через итератор): "); // не работает с несколькими полями
+
+        Iterator<Driver> itr = allDriversSet.iterator(); // итерируемся по сету с помощью метода итератора, можно записать прямо так: Iterator itr = allDriversSet.iterator(), но яве так не особо "нравится"
+       {
+            int count = 0; // создаём / инициализируем переменную для счётчика !!!! (надо бы перенести наверх)
+            while (itr.hasNext()) { // цикл "пока есть следующий"
+                count++; // увеличиваем счётчик на 1
+                System.out.println(count + ". " + itr.next().getFio());// + " категория: " + itr.next().getDrivingCategory()); // и выводим через итератор списком в консоль
+            }
+        }
+        System.out.println("\n Список всех водителей (через фор-ич):");
+        {int count = 0;
+        for (Driver driver : allDriversSet) {
+
+            count++;
+            System.out.println(count + ". " + driver.getFio() + " " + driver.getDrivingCategory());
+        }
+        }
+        }
     }
 

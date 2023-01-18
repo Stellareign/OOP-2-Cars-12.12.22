@@ -93,14 +93,6 @@ public abstract class Driver {
         this.drivingCategory = drivingCategory;
         return this;
     }
-
-    // ===== ТУСТРИНГ: ======
-    @Override
-    public String toString() {
-        return "Водитель: " + fio + "; категория" + " * " + drivingCategory + " *" + ", год выдачи прав: " + yearOfPrimaryDriveLicense +
-                "; стаж вождения, лет: " + calculateDrivingExperience();
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -122,6 +114,13 @@ public abstract class Driver {
         result = 31 * result + drivingExperience;
         return result;
     }
+    // ===== ТУСТРИНГ: ======
+    @Override
+    public String toString() {
+        return "Водитель: " + fio + "; категория" + " * " + drivingCategory + " *" + ", год выдачи прав: " + yearOfPrimaryDriveLicense +
+                "; стаж вождения, лет: " + calculateDrivingExperience();
+    }
+
 }
 
 
